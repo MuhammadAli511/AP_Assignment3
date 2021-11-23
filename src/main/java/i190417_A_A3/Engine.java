@@ -52,9 +52,27 @@ public class Engine extends Thread{
 		}
 		throw new ExceptionInvalidChoice("Entered choice is incorrect. Try Again");
 	}
+	public static boolean checkingArguments(int ar)
+	{
+		if (ar > 0)
+		{
+			return true;
+		}
+		throw new ExceptionArguments("No arguments were provided , Try Again");
+	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		
+		boolean arg_bool = false;
+		try {
+			arg_bool = checkingArguments(args.length);
+		} catch (ExceptionArguments error) {
+			System.out.println(error);
+		}
+		if (arg_bool == false)
+		{
+			System.out.println("Program Ended");
+			System.exit(0);
+		}
 		
 		// Print number of files and their names
 		System.out.println("Total Number of files : " + args.length);
@@ -176,7 +194,7 @@ public class Engine extends Thread{
 				String[] data_Arr = query.split(" ");
 				for (int i = 0 ; i < data_Arr.length ; i++)
 				{
-					System.out.println("Word : " + data_Arr[i]);
+					System.out.println("\nWord : " + data_Arr[i]);
 					for (int j = 1 ; j < args.length ; j++)
 					{
 						int frequency_Count = 0;
